@@ -37,23 +37,15 @@
 
   <ItemGroup>
     <!--
-      Pack all template content into the conventional "content" folder inside the package.
-      Exclude build artifacts, the packaging project itself, git internals, and IDE folders.
+      Glob from the templates subfolder with a trailing-slash PackagePath.
+      The trailing slash on "content/" tells NuGet to preserve each file's path
+      relative to the glob root — this is how all official MS template packs work
+      and correctly handles extensionless files (LICENSE, Dockerfile, .gitignore, etc.).
     -->
-    <Content Include="**\*" Exclude="
-        Rafatz.DotnetDockerWorker.csproj;
-        README.nuget.md;
-        icon.png;
-        .git\**;
-        .idea\**;
-        **/bin/**;
-        **/obj/**;
-        nupkg\**;
-        *.nupkg;
-        *.snupkg
-      ">
+    <Content Include="templates\dotnet-docker-worker\**\*"
+             Exclude="templates\dotnet-docker-worker\**\bin\**;templates\dotnet-docker-worker\**\obj\**">
       <Pack>true</Pack>
-      <PackagePath>content\</PackagePath>
+      <PackagePath>content/</PackagePath>
     </Content>
 
     <!-- Pack the readme shown on NuGet.org -->
