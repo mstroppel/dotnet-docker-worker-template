@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- This project exists solely to produce the dotnet new template NuGet package. -->
+
+    <!-- NuGet package identity -->
+    <PackageId>Rafatz.DotnetDockerWorker</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Rafatz</Authors>
+    <Description>A dotnet new template that scaffolds a .NET background worker service packaged as a Docker container, with GitHub Actions workflows to build and publish to GitHub Container Registry.</Description>
+    <PackageTags>dotnet;template;worker;docker;background-service;github-actions;ghcr</PackageTags>
+    <PackageProjectUrl>https://github.com/Rafatz/dotnet-docker-worker-template</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Rafatz/dotnet-docker-worker-template</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.nuget.md</PackageReadmeFile>
+
+    <!-- Template pack: no compilation, no assembly output -->
+    <PackageType>Template</PackageType>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+
+    <!-- Disable all SDK defaults that involve source compilation -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Pack all template content into the conventional "content" folder inside the package.
+      Exclude build artifacts, the packaging project itself, git internals, and IDE folders.
+    -->
+    <Content Include="**\*" Exclude="
+        Rafatz.DotnetDockerWorker.csproj;
+        README.nuget.md;
+        icon.png;
+        .git\**;
+        .idea\**;
+        **/bin/**;
+        **/obj/**;
+        nupkg\**;
+        *.nupkg;
+        *.snupkg
+      ">
+      <Pack>true</Pack>
+      <PackagePath>content\</PackagePath>
+    </Content>
+
+    <!-- Pack the readme shown on NuGet.org -->
+    <None Include="README.nuget.md" Pack="true" PackagePath="\" />
+
+    <!-- Pack an icon shown on NuGet.org (add icon.png to the repo root to enable) -->
+    <!-- <None Include="icon.png" Pack="true" PackagePath="\" /> -->
+  </ItemGroup>
+
+</Project>

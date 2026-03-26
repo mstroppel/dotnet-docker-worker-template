@@ -18,7 +18,11 @@
         ".idea/**",
         "**/obj/**",
         "**/bin/**",
-        "Rafatz.DotnetDockerWorker.csproj"
+        "Rafatz.DotnetDockerWorker.csproj",
+        "README.nuget.md",
+        "icon.png",
+        "*.nupkg",
+        "*.snupkg"
       ]
     }
   ],
