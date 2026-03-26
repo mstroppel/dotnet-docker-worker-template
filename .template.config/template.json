@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Rafatz",
+  "classifications": [ "Worker", "Docker", "Background Service" ],
+  "identity": "Rafatz.DotnetDockerWorker",
+  "name": ".NET Docker Background Worker",
+  "shortName": "dotnet-docker-worker",
+  "description": "A .NET background worker service packaged as a Docker container, with GitHub Actions workflows to build and publish to GitHub Container Registry.",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sources": [
+    {
+      "exclude": [
+        ".template.config/**",
+        ".git/**",
+        ".idea/**",
+        "**/obj/**",
+        "**/bin/**",
+        "Rafatz.DotnetDockerWorker.csproj"
+      ]
+    }
+  ],
+  "symbols": {
+    "DotnetName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Full .NET root namespace and project name prefix, e.g. MyCompany.MyWorker.",
+      "defaultValue": "Company.ProjectName",
+      "replaces": "Company.ProjectName",
+      "fileRename": "Company.ProjectName"
+    },
+    "DotnetShortName": {
+      "type": "generated",
+      "generator": "regex",
+      "datatype": "string",
+      "description": "Derived short name (last segment of DotnetName), used for class names.",
+      "parameters": {
+        "source": "DotnetName",
+        "steps": [
+          {
+            "regex": "^.*\\.",
+            "replacement": ""
+          }
+        ]
+      },
+      "replaces": "ProjectName",
+      "fileRename": "ProjectName"
+    },
+    "GithubOwner": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "GitHub username or organization that owns the repository (used in docker-compose image URL).",
+      "defaultValue": "github-owner",
+      "replaces": "github-owner"
+    },
+    "GithubName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "GitHub repository name in kebab-case, e.g. my-worker-service.",
+      "defaultValue": "project-name",
+      "replaces": "project-name",
+      "fileRename": "project-name"
+    }
+  }
+}

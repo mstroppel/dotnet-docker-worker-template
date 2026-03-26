@@ -1,0 +1,6 @@
+services:
+  project-name:
+    image: ghcr.io/github-owner/project-name:latest
+    restart: unless-stopped
+    environment:
+      - WORKER_DELAY=15

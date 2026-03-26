@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/docker-publish.yml" />
+    <File Path=".github/workflows/pr-check.yml" />
+  </Folder>
+  <Folder Name="/Solution Files/">
+    <File Path=".gitignore" />
+    <File Path="docker-compose.yml" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/Company.ProjectName.Worker/Company.ProjectName.Worker.csproj" />
+  <Project Path="tests/Company.ProjectName.Worker.Tests/Company.ProjectName.Worker.Tests.csproj" />
+</Solution>
