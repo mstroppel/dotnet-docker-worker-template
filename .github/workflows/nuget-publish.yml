@@ -1,13 +1,39 @@
 name: NuGet Publish
 
 on:
+  pull_request:
+    branches:
+      - main
   release:
     types:
       - published
 
 jobs:
+  pack-validation:
+    name: Validate NuGet Pack
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Pack template
+        run: |
+          dotnet pack Rafatz.DotnetDockerWorker.csproj \
+            --configuration Release \
+            --output ./nupkg
+
   pack-and-publish:
     name: Pack & Publish to NuGet.org
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     permissions:
       contents: read
